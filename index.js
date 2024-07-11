@@ -45,7 +45,6 @@ const dateInput = access(".date-input");
 const timeInput = access(".time-input");
 const addTaskBtnModal = access(".add-task-btn-modal");
 const saveTaskBtn = access('.save-task-btn-modal')
-console.log(saveTaskBtn)
 
 const hideModalBtn = access(".hide-modal-btn");
 const normalContainer = access(".normal-container");
