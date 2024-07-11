@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  background-color: rgb(48, 46, 53);
+  background-color: rgb(7, 44, 54);
 }
 
 .normal-container {
@@ -147,7 +147,7 @@ justify-content: space-between;
   margin-top: 20px;
   margin-left: 20%;
   margin-right: 20%;
-  background-color: rgb(3, 31, 62);
+  background-color: rgb(8, 51, 56);
   color: white;
   border-radius: 10px;
   width: 90vw;
