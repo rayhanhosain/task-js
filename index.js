@@ -1,4 +1,4 @@
-let taskOrTasks = JSON.parse(localStorage.getItem("taskOrTasks")) || [];
+let taskOrTasks = localStorage.getItem("taskOrTasks") ? JSON.parse(localStorage.getItem("taskOrTasks")) : [];
 document.addEventListener("DOMContentLoaded", () => {
   displayTask();
 });

@@ -52,26 +52,41 @@ body {
 
 
 
-.add-task-modal {
+.task-modal {
   display: flex;
   flex-direction: column;
   margin-right: 10px;
   
 
 }
-.task-name-txt, .date-txt, .time-txt {
+.task-name-txt, .date-txt, .time-txt, .description-txt {
   color: white;
   font-size: 1.2rem;
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
 .task-input, .date-input, .time-input {
+  margin-left: 8px;
   color: white;
   height: 2rem;
   font-size: 1.2rem;
   background-color: rgb(37, 49, 49);
   border: 2px solid black;
   padding-left: 8px;
-  
+  border-radius: 5px;
+}
+
+.descrition-input {
+  color: white;
+  height: 2rem;
+  font-size: 1.2rem;
+  background-color: rgb(37, 49, 49);
+  border: 2px solid black;
+  padding-left: 8px;
+  border-radius: 5px;
+  margin-left: 8px;
+  height: 3rem;
 }
 .add-task-btn-modal {
   padding: 20px;

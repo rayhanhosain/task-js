@@ -3,20 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modal</title>
+  <title>Task</title>
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <div class="modal-full">
+
+
   <div class="modal-section">
-    <div class="add-task-modal">
+    <div class="task-and-hide">
+    <div class="task-modal">
 
      <div class="task-name-txt">Task name: 
       <input type="text" class="task-input" name="Task name" id="task-input" placeholder="Insert Task Name">
     </div>
 
-    <div class="task-name-txt">Description: 
-      <input type="text" class="descrition-input" name="description" id="descrition-input" placeholder="Insert Description">
+    <div class="description-txt">Description: 
+      <textarea type="text" class="descrition-input" name="description" id="descrition-input" placeholder="Insert Description"></textarea>
     </div>
 
      <div class="date-txt">Date: 
@@ -27,12 +30,15 @@
       <input type="time" class="time-input">
     </div>
 
-     <button class="add-task-btn-modal">Add Task</button>
+     
     </div>
 
     <div class="hide-modal">
       <button class="hide-modal-btn">&#215</button>
     </div>
+
+    </div>
+    <button class="add-task-btn-modal">Add Task</button>
   </div>
 </div>
 
