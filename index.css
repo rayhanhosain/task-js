@@ -27,7 +27,10 @@ body {
   width: 100vw;
   display: none;
 }
-
+.task-and-hide {
+display: flex;
+justify-content: space-between;
+}
 
 .modal-section {
   position: absolute;
@@ -35,6 +38,7 @@ body {
   left: 50%; 
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   border: 5px solid black;
   padding: 25px;
