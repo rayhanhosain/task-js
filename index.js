@@ -1,20 +1,54 @@
-let taskOrTasks = localStorage.getItem("taskOrTasks") ? JSON.parse(localStorage.getItem("taskOrTasks")) : [];
+let taskOrTasks = localStorage.getItem("taskOrTasks")
+  ? JSON.parse(localStorage.getItem("taskOrTasks"))
+  : [];
+
+
+
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   displayTask();
+  
+ 
+
+   //after clicking tik button
+
+//delete
+
+
+
+
+
+   
+  
+
+
 });
 
-const forModalBtn = document.querySelector(".for-modal-btn");
-const modalFull = document.querySelector(".modal-full");
-const taskNameInput = document.querySelector(".task-input");
-const dateInput = document.querySelector(".date-input");
-const timeInput = document.querySelector(".time-input");
-const addTaskBtnModal = document.querySelector(".add-task-btn-modal");
-const hideModalBtn = document.querySelector(".hide-modal-btn");
-const normalContainer = document.querySelector(".normal-container");
+
+
+
+//access function
+function access(info) {
+  return document.querySelector(info)
+}
+
+
+let descriptionInput = access(".description-input")
+
+let forModalBtn = access(".for-modal-btn");
+
+const modalFull = access(".modal-full");
+const taskNameInput = access(".task-input");
+const dateInput = access(".date-input");
+const timeInput = access(".time-input");
+const addTaskBtnModal = access(".add-task-btn-modal");
+const hideModalBtn = access(".hide-modal-btn");
+const normalContainer = access(".normal-container");
 
 //function for displaying task
 function displayTask() {
-
   //selecting existing divs containing task info
   let taskDivOrDivs = document.querySelectorAll(".task-div");
 
@@ -25,7 +59,7 @@ function displayTask() {
 
   //for each object inside the taskOrTasks array, one div containing task info gets made
   taskOrTasks.forEach((task) => {
-    makeTaskDiv(task.name, task.date, task.time, task.id, task.tik); //makeTaskDiv function call
+    makeTaskDiv(task.name, task.description, task.date, task.time, task.id, task.tik); //makeTaskDiv function call
   });
 }
 
@@ -41,14 +75,16 @@ hideModalBtn.addEventListener("click", () => {
 });
 
 //dynamically adding divs containing task info
-function makeTaskDiv(name, date, time, id, tik) {
+function makeTaskDiv(name, description, date, time, id, tik) {
   let taskDiv = document.createElement("div");
   taskDiv.className = "task-div";
 
   //if a particular object's tik: false, then normal display of the task info
   if (tik === false) {
     taskDiv.innerHTML = `<div class="task-detail">
-            <div class="task-name ">${name}</div>
+            <div class="task-name">${name}</div>
+
+            <div class="description-txt-display">${description}</span> </div>
             <div class="time-date">
               Date: <span class="added-date">${date}</span>
               Time: <span class="added-time">${time}</span>
@@ -58,60 +94,79 @@ function makeTaskDiv(name, date, time, id, tik) {
           
           
           <div class="tick-edit-dlt-task">
-          <button class="tick-task-btn">&#10004</button>
-          <button class="edit-task-btn">&#9998</button>
-          <button class="dlt-task-btn">&#215</button>
+          <button class="tick-task-btn" data-id="${id}">&#10004</button>
+          <button class="edit-task-btn" data-id="${id}">&#9998</button>
+          <button class="dlt-task-btn" data-id="${id}">&#215</button>
           
           </div>`;
   } else {
     //if a particular object's tik: true, the decorated display of the task name
     taskDiv.innerHTML = `<div class="task-detail">
             <div class="task-name lined-task">${name}</div>
+
+            <div class="description-txt-display">${description}</span> </div>
             <div class="time-date">
               Date: <span class="added-date">${date}</span>
               Time: <span class="added-time">${time}</span>
             </div>
           </div>
+
     
-          <div class="tick-dlt-task">
-          <div class="tick-task-btn">&#10004</div>
-          <div class="dlt-task-btn">&#215</div>
+          <div class="tick-edit-dlt-task">
+          <button class="tick-task-btn" data-id="${id}">&#10004</button>
+          <button class="edit-task-btn" data-id="${id}">&#9998</button>
+          <button class="dlt-task-btn" data-id="${id}">&#215</button>
+
           </div>`;
   }
-  
-//appending div
+
+  //appending div
   if (normalContainer.children.length >= 2) {
     normalContainer.insertBefore(taskDiv, normalContainer.children[1]);
   } else {
     normalContainer.appendChild(taskDiv);
   }
 
-  let taskName = document.querySelector(".task-name");
-  let tikBtn = document.querySelector(".tick-task-btn");
-  let taskDltBtn = document.querySelector(".dlt-task-btn");
+  let taskName = access('.task-name')
+  let tikBtn = access(".tick-task-btn");
+  let editBtn = access('.edit-task-btn')
+  let taskDltBtn = access(".dlt-task-btn");
 
-  //after clicking tik button
   tikBtn.addEventListener("click", () => {
-  taskName.classList.add('lined-task') //adding new class to make Task Name decorized
+      taskName.classList.add("lined-task"); //adding new class to make Task Name decorized
+  
+      //finding the particular object for making change for clicking tik button
+      let particularObject = taskOrTasks.find((obj) => {
+        return obj.id == parseInt(tikBtn.dataset.id);
+      });
+      particularObject.tik = true;
+      localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
+    }); //saving array after modifying one property of a particular object
+    console.log(taskOrTasks)
+  
 
-  //finding the particular object for making change for clicking tik button
-  let particularObject = taskOrTasks.find(obj => {
-    return obj.id === id
+    taskDltBtn.addEventListener("click", () => {
+        taskDiv.remove();
+        taskOrTasks = taskOrTasks.filter((task) => {
+          return task.id !== id;
+        });
+        
+        localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks)); //saving array after deleting one object
+      });
+
+      //edit
+editBtn.addEventListener('click', (e) => {
+    modalFull.classList.add('modal-section-display')
+
+    let object = taskOrTasks.find(obj => {
+    obj.id == editBtn.dataset.id
+    })
+
+    addTaskBtnModal.innerText = "save";
+    console.log(taskOrTasks)
   })
-  particularObject.tik = true
-  localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
-  }); //saving array after modifying one property of a particular object
 
-  //delete task
-  taskDltBtn.addEventListener("click", () => {
-    taskDiv.remove();
-    taskOrTasks = taskOrTasks.filter((task) => {
-     return task.id !== id;
-    });
-
-    localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks)); //saving array after deleting one object
-    
-  });
+  
 }
 
 //after clicking Click to add task button
@@ -124,26 +179,28 @@ addTaskBtnModal.addEventListener("click", () => {
       taskOrTasks.push({
         id: 1,
         name: taskNameInput.value,
+        description: descriptionInput.value,
         date: dateInput.value,
         time: timeInput.value,
         tik: false,
       });
     } else {
-
-    //id of the current object is 1 more than the taskOrTasks array's last object's id
+      //id of the current object is 1 more than the taskOrTasks array's last object's id
       taskOrTasks.push({
         id: taskOrTasks[taskOrTasks.length - 1].id + 1,
         name: taskNameInput.value,
+        description: descriptionInput.value,
         date: dateInput.value,
         time: timeInput.value,
         tik: false,
       });
     }
-    displayTask(taskNameInput.value, dateInput.value, timeInput.value); //display task function call
+    displayTask(); //display task function call
     localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks)); //saving taskOrTasks array in the local storage
-    
+
     //clear field
     taskNameInput.value = "";
+    descriptionInput.value = "";
     dateInput.value = "";
     timeInput.value = "";
     //after clicking the Add Task button, the modal disappears

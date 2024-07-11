@@ -3,6 +3,7 @@ body {
   flex-direction: column;
   margin: 0;
   background-color: rgb(20, 138, 103);
+  font-family: sans-serif;
 }
 
 .normal-container {
@@ -81,7 +82,7 @@ justify-content: space-between;
   border-radius: 5px;
 }
 
-.descrition-input {
+.description-input {
   color: white;
   height: 2rem;
   font-size: 1.2rem;
@@ -91,6 +92,10 @@ justify-content: space-between;
   border-radius: 5px;
   margin-left: 8px;
   height: 3rem;
+}
+.description-txt-display {
+  padding: 10px 5px 5px 0px;
+  color: rgb(230, 230, 230);
 }
 .add-task-btn-modal {
   padding: 20px;
@@ -160,7 +165,7 @@ justify-content: space-between;
   font-weight: bold;
 }
 .time-date {
-  font-size: small;
+  font-size: medium;
   color: rgb(201, 163, 92);
   padding-top: 5px;
   margin-right: 10px;
