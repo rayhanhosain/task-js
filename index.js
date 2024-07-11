@@ -54,10 +54,14 @@ function makeTaskDiv(name, date, time, id, tik) {
               Time: <span class="added-time">${time}</span>
             </div>
           </div>
-    
-          <div class="tick-dlt-task">
-          <div class="tick-task-btn">&#10004</div>
-          <div class="dlt-task-btn">&#215</div>
+
+          
+          
+          <div class="tick-edit-dlt-task">
+          <button class="tick-task-btn">&#10004</button>
+          <button class="edit-task-btn">&#9998</button>
+          <button class="dlt-task-btn">&#215</button>
+          
           </div>`;
   } else {
     //if a particular object's tik: true, the decorated display of the task name
