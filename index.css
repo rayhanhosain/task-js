@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0;
-  background-color: rgb(115, 112, 104);
+  background-color: rgb(48, 46, 53);
 }
 
 .normal-container {
