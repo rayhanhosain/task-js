@@ -108,9 +108,33 @@ justify-content: space-between;
   border-radius: 10px;
   box-shadow: 0 0 5px black;
 }
+
 .add-task-btn-modal:hover {
   background-color: rgb(24, 58, 49);
+}
+
+.add-task-btn-hide {
+  display: none;
+}
+.save-task-btn-modal {
+  padding: 20px;
+  font-size: 2rem;
+  background-color: rgb(2, 58, 58);
+  border: 2px solid rgb(26, 27, 26);
+  color: white;
+  font-weight: bold;
+  align-self: center;
+  border-radius: 10px;
+  box-shadow: 0 0 5px black;
+  display: none;
+}
+
+.save-task-btn-modal:hover {
+  background-color: rgb(24, 58, 49);
   cursor: pointer;
+}
+.save-task-btn-display {
+  display: block;
 }
 .hide-modal-btn {
   background-color: red;

@@ -44,6 +44,9 @@ const taskNameInput = access(".task-input");
 const dateInput = access(".date-input");
 const timeInput = access(".time-input");
 const addTaskBtnModal = access(".add-task-btn-modal");
+const saveTaskBtn = access('.save-task-btn-modal')
+console.log(saveTaskBtn)
+
 const hideModalBtn = access(".hide-modal-btn");
 const normalContainer = access(".normal-container");
 
@@ -63,16 +66,7 @@ function displayTask() {
   });
 }
 
-//modal section appears
-forModalBtn.addEventListener("click", () => {
-  modalFull.classList.add("modal-section-display");
-});
 
-//modal section hides
-hideModalBtn.addEventListener("click", () => {
-  modalFull.classList.add("modal-section-hide");
-  modalFull.classList.remove("modal-section-display");
-});
 
 //dynamically adding divs containing task info
 function makeTaskDiv(name, description, date, time, id, tik) {
@@ -142,7 +136,6 @@ function makeTaskDiv(name, description, date, time, id, tik) {
       particularObject.tik = true;
       localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
     }); //saving array after modifying one property of a particular object
-    console.log(taskOrTasks)
   
 
     taskDltBtn.addEventListener("click", () => {
@@ -159,11 +152,45 @@ editBtn.addEventListener('click', (e) => {
     modalFull.classList.add('modal-section-display')
 
     let object = taskOrTasks.find(obj => {
-    obj.id == editBtn.dataset.id
+    return obj.id === parseInt(editBtn.dataset.id)
     })
 
-    addTaskBtnModal.innerText = "save";
-    console.log(taskOrTasks)
+
+    saveTaskBtn.classList.add('save-task-btn-display')
+    addTaskBtnModal.classList.add('add-task-btn-hide')
+    
+    taskNameInput.value = object.name
+    descriptionInput.value = object.description
+    dateInput.value = object.date
+    timeInput.value = object.time
+
+
+if (taskNameInput.value.trim() !== "") {
+  
+}
+
+
+saveTaskBtn.addEventListener('click', ()=> {
+  if (taskNameInput.value === "") {
+    alert("Add task name");
+  } else {
+  object.name = taskNameInput.value,
+  object.description = descriptionInput.value,
+  object.date = dateInput.value,
+  object.time= timeInput.value}
+
+  displayTask(); //display task function call
+  localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
+
+    //after clicking the Add Task button, the modal disappears
+    modalFull.classList.add("modal-section-hide");
+    modalFull.classList.remove("modal-section-display");
+
+    saveTaskBtn.classList.remove('save-task-btn-display')
+    addTaskBtnModal.classList.remove('add-task-btn-hide')
+
+})
+
   })
 
   
@@ -198,13 +225,33 @@ addTaskBtnModal.addEventListener("click", () => {
     displayTask(); //display task function call
     localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks)); //saving taskOrTasks array in the local storage
 
-    //clear field
-    taskNameInput.value = "";
-    descriptionInput.value = "";
-    dateInput.value = "";
-    timeInput.value = "";
+  
     //after clicking the Add Task button, the modal disappears
     modalFull.classList.add("modal-section-hide");
     modalFull.classList.remove("modal-section-display");
   }
 });
+
+
+//modal section appears
+forModalBtn.addEventListener("click", () => {
+  modalFull.classList.add("modal-section-display");
+  taskNameInput.value = ""
+  descriptionInput.value = ""
+  dateInput.value = ""
+  timeInput.value = ""
+});
+
+//modal section hides
+hideModalBtn.addEventListener("click", () => {
+  modalFull.classList.add("modal-section-hide");
+  modalFull.classList.remove("modal-section-display");
+  saveTaskBtn.classList.remove('save-task-btn-display')
+  addTaskBtnModal.classList.remove('add-task-btn-hide')
+  taskNameInput.value = ""
+  descriptionInput.value = ""
+  dateInput.value = ""
+  timeInput.value = ""
+});
+
+
