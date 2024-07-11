@@ -164,20 +164,15 @@ editBtn.addEventListener('click', (e) => {
     timeInput.value = object.time
 
 
-if (taskNameInput.value.trim() !== "") {
-  
-}
-
-
 saveTaskBtn.addEventListener('click', ()=> {
-  if (taskNameInput.value === "") {
-    alert("Add task name");
+  if (!taskNameInput.value.trim()) {
+    alert("Task Name Input is empty");
   } else {
-  object.name = taskNameInput.value,
-  object.description = descriptionInput.value,
-  object.date = dateInput.value,
-  object.time= timeInput.value}
+  object.name = taskNameInput.value
+  object.description = descriptionInput.value
+  object.date = dateInput.value
 
+  object.time= timeInput.value
   displayTask(); //display task function call
   localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
 
@@ -187,6 +182,9 @@ saveTaskBtn.addEventListener('click', ()=> {
 
     saveTaskBtn.classList.remove('save-task-btn-display')
     addTaskBtnModal.classList.remove('add-task-btn-hide')
+  }
+
+ 
 
 })
 
@@ -197,7 +195,7 @@ saveTaskBtn.addEventListener('click', ()=> {
 
 //after clicking Click to add task button
 addTaskBtnModal.addEventListener("click", () => {
-  if (taskNameInput.value === "") {
+  if (!taskNameInput.value.trim()) {
     alert("Add task name");
   } else {
     //if there is no other div ...the id is 1
