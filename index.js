@@ -163,7 +163,7 @@ taskName.addEventListener('click', ()=> {
         localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks)); //saving array after deleting one object
       });
 
-      //edit
+     // edit
 editBtn.addEventListener('click', (e) => {
     modalFull.classList.add('modal-section-display')
 
@@ -180,28 +180,17 @@ editBtn.addEventListener('click', (e) => {
     dateInput.value = object.date
     timeInput.value = object.time
 
-    console.log(object)
-    console.log(taskOrTasks)
-
-
-
-
-
-  })
-
-
-  saveTaskBtn.addEventListener('click', ()=> {
-    let object = taskOrTasks.find(obj => {
-      return obj.id === id
-      })
-  
+   function saveBtn () {
     if (taskNameInput.value.trim() === "") {
       alert("Task Name Input is empty");
     } else {
-    object.name = taskNameInput.value
-    object.description = descriptionInput.value
-    object.date = dateInput.value
-    object.time= timeInput.value
+      object.name = taskNameInput.value
+      object.description = descriptionInput.value
+      object.date = dateInput.value
+      object.time= timeInput.value
+    }
+    
+    
     localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
   
       //after clicking the Add Task button, the modal disappears
@@ -210,16 +199,27 @@ editBtn.addEventListener('click', (e) => {
   
       saveTaskBtn.classList.remove('save-task-btn-display')
       addTaskBtnModal.classList.remove('add-task-btn-hide')
-    }
+    
   
   //  console.log(taskOrTasks)
     displayTask()
+    saveTaskBtn.removeEventListener('click', saveBtn)
+   }
+
+    saveTaskBtn.addEventListener('click', saveBtn)
+
+
   })
+
+
   
 }
 
 //after clicking Click to add task button
 addTaskBtnModal.addEventListener("click", () => {
+      saveTaskBtn.classList.remove('save-task-btn-display')
+      addTaskBtnModal.classList.remove('add-task-btn-hide')
+    
   if (!taskNameInput.value.trim()) {
     alert("Add task name");
   } else {
@@ -275,5 +275,6 @@ hideModalBtn.addEventListener("click", () => {
   dateInput.value = ""
   timeInput.value = ""
 });
+
 
 
