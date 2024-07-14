@@ -77,38 +77,39 @@ function makeTaskDiv(name, description, date, time, id, tik) {
     taskDiv.innerHTML = `<div class="task-detail">
             <div class="task-name">${name}</div>
 
-            <div class="description-txt-display">${description}</span> </div>
+            <div class="description-txt-window">${description}</span> </div>
             <div class="time-date">
               Date: <span class="added-date">${date}</span>
               Time: <span class="added-time">${time}</span>
-            </div>
-          </div>
-
-          
-          
-          <div class="tick-edit-dlt-task">
+              <div class="tick-edit-dlt-task">
           <button class="tick-task-btn" data-id="${id}">&#10004</button>
           <button class="edit-task-btn" data-id="${id}">&#9998</button>
           <button class="dlt-task-btn" data-id="${id}">&#215</button>
+            </div>
+          </div>
+
+    
           
-          </div>`;
+
+          </div>`;;
   } else {
     //if a particular object's tik: true, the decorated display of the task name
     taskDiv.innerHTML = `<div class="task-detail">
             <div class="task-name lined-task">${name}</div>
 
-            <div class="description-txt-display">${description}</span> </div>
+            <div class="description-txt-window">${description}</span> </div>
             <div class="time-date">
               Date: <span class="added-date">${date}</span>
               Time: <span class="added-time">${time}</span>
+              <div class="tick-edit-dlt-task">
+          <button class="tick-task-btn" data-id="${id}">&#10004</button>
+          <button class="edit-task-btn" data-id="${id}">&#9998</button>
+          <button class="dlt-task-btn" data-id="${id}">&#215</button>
             </div>
           </div>
 
     
-          <div class="tick-edit-dlt-task">
-          <button class="tick-task-btn" data-id="${id}">&#10004</button>
-          <button class="edit-task-btn" data-id="${id}">&#9998</button>
-          <button class="dlt-task-btn" data-id="${id}">&#215</button>
+          
 
           </div>`;
   }
@@ -124,6 +125,22 @@ function makeTaskDiv(name, description, date, time, id, tik) {
   let tikBtn = access(".tick-task-btn");
   let editBtn = access('.edit-task-btn')
   let taskDltBtn = access(".dlt-task-btn");
+  let descriptionSection = access('.description-txt-window')
+ let btnSection = access('.time-date')
+
+
+taskName.addEventListener('click', ()=> {
+  
+
+ if (descriptionSection.classList.contains("description-txt-window-display")) {
+  descriptionSection.classList.remove('description-txt-window-display')
+  btnSection.classList.remove('time-date-display')
+ } else {
+  descriptionSection.classList.add('description-txt-window-display')
+  btnSection.classList.add('time-date-display')
+ }
+})
+
 
   tikBtn.addEventListener("click", () => {
       taskName.classList.add("lined-task"); //adding new class to make Task Name decorized
@@ -151,7 +168,7 @@ editBtn.addEventListener('click', (e) => {
     modalFull.classList.add('modal-section-display')
 
     let object = taskOrTasks.find(obj => {
-    return obj.id === parseInt(editBtn.dataset.id)
+    return obj.id === id
     })
 
 
@@ -163,33 +180,41 @@ editBtn.addEventListener('click', (e) => {
     dateInput.value = object.date
     timeInput.value = object.time
 
+    console.log(object)
+    console.log(taskOrTasks)
 
-saveTaskBtn.addEventListener('click', ()=> {
-  if (!taskNameInput.value.trim()) {
-    alert("Task Name Input is empty");
-  } else {
-  object.name = taskNameInput.value
-  object.description = descriptionInput.value
-  object.date = dateInput.value
 
-  object.time= timeInput.value
-  displayTask(); //display task function call
-  localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
 
-    //after clicking the Add Task button, the modal disappears
-    modalFull.classList.add("modal-section-hide");
-    modalFull.classList.remove("modal-section-display");
 
-    saveTaskBtn.classList.remove('save-task-btn-display')
-    addTaskBtnModal.classList.remove('add-task-btn-hide')
-  }
-
- 
-
-})
 
   })
 
+
+  saveTaskBtn.addEventListener('click', ()=> {
+    let object = taskOrTasks.find(obj => {
+      return obj.id === id
+      })
+  
+    if (taskNameInput.value.trim() === "") {
+      alert("Task Name Input is empty");
+    } else {
+    object.name = taskNameInput.value
+    object.description = descriptionInput.value
+    object.date = dateInput.value
+    object.time= timeInput.value
+    localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
+  
+      //after clicking the Add Task button, the modal disappears
+      modalFull.classList.add("modal-section-hide");
+      modalFull.classList.remove("modal-section-display");
+  
+      saveTaskBtn.classList.remove('save-task-btn-display')
+      addTaskBtnModal.classList.remove('add-task-btn-hide')
+    }
+  
+  //  console.log(taskOrTasks)
+    displayTask()
+  })
   
 }
 
