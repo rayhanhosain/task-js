@@ -14,13 +14,16 @@ body {
   /* backgr  width: 95vw;ound: radial-gradient(circle, red, green); */
   display: flex;
   width: 90vw;
-  margin: 5px 10% 10% 5%;
+  margin: 5px 10% 20px 5%;
   flex-direction: column;
   align-items: center;
   flex-grow: unset;
   z-index: 1;
   
   
+}
+.normal-container > :last-child {
+margin-bottom: 30px;
 }
 .top {
   display: flex;
@@ -55,7 +58,9 @@ body {
 
 
 .modal-full {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 2;
   background-color: rgba(120, 120, 120, 0.281);
   height: 100vh;
