@@ -188,10 +188,11 @@ editBtn.addEventListener('click', (e) => {
       object.description = descriptionInput.value
       object.date = dateInput.value
       object.time= timeInput.value
+      localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
     }
     
     
-    localStorage.setItem("taskOrTasks", JSON.stringify(taskOrTasks));
+   
   
       //after clicking the Add Task button, the modal disappears
       modalFull.classList.add("modal-section-hide");

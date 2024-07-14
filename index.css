@@ -1,12 +1,11 @@
 body {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   font-family: sans-serif;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(to bottom right,rgb(32, 92, 86),rgb(24, 122, 96),rgb(24, 122, 68),rgb(21, 109, 68), rgb(24, 122, 68), rgb(21, 109, 59), rgba(32, 92, 86, 0.995)) ;
+  background: linear-gradient(tan, teal, tan);
 }
+  /*wheat tan tomato seagreen  lightgreen palegreen salmon cadetblue aquamarine teal*/
 
 .normal-container {
   position: absolute;
@@ -14,6 +13,7 @@ body {
 
   /* backgr  width: 95vw;ound: radial-gradient(circle, red, green); */
   display: flex;
+  width: 90vw;
   margin: 5px 10% 10% 5%;
   flex-direction: column;
   align-items: center;
