@@ -4,6 +4,7 @@ let taskOrTasks = localStorage.getItem("taskOrTasks")
 
 document.addEventListener("DOMContentLoaded", () => {
   displayTask();
+
 });
 
 const descriptionInput = access(".description-input");
@@ -176,11 +177,30 @@ modalFull.addEventListener('click', (e)=> {
   }
 })
 
+
+
 //modal section appears
 forModalBtn.addEventListener("click", () => {
   modalVisible();
   clearInput();
 });
+
+
+//Save Task or Add Task button click for Enter key press
+window.addEventListener("keypress", (e) => {
+  console.log(e.key)
+  if (e.key === "Enter" && modalFull.classList.contains('modal-section-display')) {
+    console.log('sra')
+    if (saveTaskBtn.classList.contains('save-task-btn-display')) {
+      saveTaskBtn.click()
+    } else {
+      addTaskBtnModal.click()
+    }
+  }
+}
+)
+
+
 
 //modal section hides
 hideModalBtn.addEventListener("click", () => {
@@ -193,6 +213,9 @@ hideModalBtn.addEventListener("click", () => {
 function modalVisible() {
   modalFull.classList.add("modal-section-display");
 }
+
+
+
 
 //clear input field
 function clearInput() {
@@ -273,3 +296,7 @@ function html(name, description, date, time, id, tik, div) {
           </div>`;
   }
 }
+
+
+
+
