@@ -188,9 +188,9 @@ forModalBtn.addEventListener("click", () => {
 
 //Save Task or Add Task button click for Enter key press
 window.addEventListener("keypress", (e) => {
-  console.log(e.key)
+  
   if (e.key === "Enter" && modalFull.classList.contains('modal-section-display')) {
-    console.log('sra')
+   
     if (saveTaskBtn.classList.contains('save-task-btn-display')) {
       saveTaskBtn.click()
     } else {
