@@ -167,6 +167,15 @@ addTaskBtnModal.addEventListener("click", () => {
   }
 });
 
+//modal disappearance after clicking outside of the modal
+modalFull.addEventListener('click', (e)=> {
+  if (e.target === modalFull) {
+    modalDisappearance();
+  saveBtnNotVisible();
+  clearInput();
+  }
+})
+
 //modal section appears
 forModalBtn.addEventListener("click", () => {
   modalVisible();
